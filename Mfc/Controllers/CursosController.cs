@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Mfc.Models;
+using Mfc.Services;
 
 namespace Mfc.Controllers
 {
     public class CursosController : Controller
     {
+        private readonly CursoService _cursoService;
+
         private readonly MfcContext _context;
 
         public CursosController(MfcContext context)
@@ -48,9 +51,7 @@ namespace Mfc.Controllers
             return View();
         }
 
-        // POST: Cursos/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NomeCurso,Descricao,Trabalho")] Cursos cursos)

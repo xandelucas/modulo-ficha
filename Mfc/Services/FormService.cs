@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Mfc.Services
 {
-    public class FormServices
+    public class FormService
     {
 
     }

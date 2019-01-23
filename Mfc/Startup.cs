@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using Mfc.Models;
-
+using Mfc.Services;
 
 namespace Mfc
 {
@@ -41,6 +41,8 @@ namespace Mfc
 
             services.AddDbContext<MfcContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MfcContext")));
+            services.AddScoped<CursoService>();
+            services.AddScoped<FormService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
