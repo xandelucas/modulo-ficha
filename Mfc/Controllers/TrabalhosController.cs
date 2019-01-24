@@ -6,32 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Mfc.Models;
-using Mfc.Models.ViewModels;
-using Mfc.Services;
 
 namespace Mfc.Controllers
 {
-    public class CursosController : Controller
+    public class TrabalhosController : Controller
     {
-        private readonly CursoService _cursoService;
-        private readonly TrabalhoService _trabalhoService;
-
         private readonly MfcContext _context;
 
-        public CursosController(MfcContext context, CursoService cursoService, TrabalhoService trabalhoService)
+        public TrabalhosController(MfcContext context)
         {
             _context = context;
-            _cursoService = cursoService;
-            _trabalhoService = trabalhoService;
         }
 
-        // GET: Cursos
+        // GET: Trabalhos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cursos.ToListAsync());
+            return View(await _context.Trabalho.ToListAsync());
         }
 
-        // GET: Cursos/Details/5
+        // GET: Trabalhos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,39 +32,39 @@ namespace Mfc.Controllers
                 return NotFound();
             }
 
-            var cursos = await _context.Cursos
+            var trabalho = await _context.Trabalho
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (cursos == null)
+            if (trabalho == null)
             {
                 return NotFound();
             }
 
-            return View(cursos);
+            return View(trabalho);
         }
 
-        // GET: Cursos/Create
+        // GET: Trabalhos/Create
         public IActionResult Create()
         {
-            var trabalho = _trabalhoService.FindAll();
-            var viewModel = new CursosViewModel { Trabalhos = trabalho };
-            return View(viewModel);
+            return View();
         }
 
-
+        // POST: Trabalhos/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NomeCurso,Descricao,Trabalho")] Cursos cursos)
+        public async Task<IActionResult> Create([Bind("Id,NomeTrabalho")] Trabalho trabalho)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cursos);
+                _context.Add(trabalho);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cursos);
+            return View(trabalho);
         }
 
-        // GET: Cursos/Edit/5
+        // GET: Trabalhos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -79,22 +72,22 @@ namespace Mfc.Controllers
                 return NotFound();
             }
 
-            var cursos = await _context.Cursos.FindAsync(id);
-            if (cursos == null)
+            var trabalho = await _context.Trabalho.FindAsync(id);
+            if (trabalho == null)
             {
                 return NotFound();
             }
-            return View(cursos);
+            return View(trabalho);
         }
 
-        // POST: Cursos/Edit/5
+        // POST: Trabalhos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeCurso,Descricao,Trabalho")] Cursos cursos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeTrabalho")] Trabalho trabalho)
         {
-            if (id != cursos.Id)
+            if (id != trabalho.Id)
             {
                 return NotFound();
             }
@@ -103,12 +96,12 @@ namespace Mfc.Controllers
             {
                 try
                 {
-                    _context.Update(cursos);
+                    _context.Update(trabalho);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CursosExists(cursos.Id))
+                    if (!TrabalhoExists(trabalho.Id))
                     {
                         return NotFound();
                     }
@@ -119,10 +112,10 @@ namespace Mfc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cursos);
+            return View(trabalho);
         }
 
-        // GET: Cursos/Delete/5
+        // GET: Trabalhos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,30 +123,30 @@ namespace Mfc.Controllers
                 return NotFound();
             }
 
-            var cursos = await _context.Cursos
+            var trabalho = await _context.Trabalho
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (cursos == null)
+            if (trabalho == null)
             {
                 return NotFound();
             }
 
-            return View(cursos);
+            return View(trabalho);
         }
 
-        // POST: Cursos/Delete/5
+        // POST: Trabalhos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cursos = await _context.Cursos.FindAsync(id);
-            _context.Cursos.Remove(cursos);
+            var trabalho = await _context.Trabalho.FindAsync(id);
+            _context.Trabalho.Remove(trabalho);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CursosExists(int id)
+        private bool TrabalhoExists(int id)
         {
-            return _context.Cursos.Any(e => e.Id == id);
+            return _context.Trabalho.Any(e => e.Id == id);
         }
     }
 }

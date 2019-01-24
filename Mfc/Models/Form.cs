@@ -23,8 +23,8 @@ namespace Mfc.Models
         [Display(Name = "Código Cutter:")]
         public CodCutter CodCutter { get; set; }
 
-        public string Trabalho { get; set; } /* (Tese, Dissertação, TCC(Especialização), TCC(Graduação)*/
-        public Cursos Curso { get; set; } //Pesquisar como fazer a pesquisa
+        public Trabalho Trabalho { get; set; }
+        public ICollection<Cursos> Curso { get; set; } = new List<Cursos>(); //Pesquisar como fazer a pesquisa
 
         [Display(Name = "Nome completo do orientador:")]
         public string NomeOrientador { get; set; }
@@ -45,6 +45,43 @@ namespace Mfc.Models
         public Fonte TipoFonte { get; set; }
         public int TamFonte { get; set; }
 
-       
+        public Form()
+        {
+
+        }
+
+        public Form(int id, string nome, string titulo, string subTitulo, CodCutter codCutter, 
+            Trabalho trabalho, string nomeOrientador, bool orientadora, string nomeCoorientador, 
+            bool coorientadora, int ano, PadraoNumFol tipoFolha, int padraoNumFolId, int numFolhaRomano, 
+            int numFolhaArabico, Ilustracao tipoIlustracao,bool bibliografia, int alturaFolha, 
+            string palavrasChave, Fonte tipoFonte, int tamFonte)
+        {
+            Id = id;
+            Nome = nome;
+            Titulo = titulo;
+            SubTitulo = subTitulo;
+            CodCutter = codCutter;
+            Trabalho = trabalho;
+            NomeOrientador = nomeOrientador;
+            Orientadora = orientadora;
+            NomeCoorientador = nomeCoorientador;
+            Coorientadora = coorientadora;
+            Ano = ano;
+            TipoFolha = tipoFolha;
+            PadraoNumFolId = padraoNumFolId;
+            NumFolhaRomano = numFolhaRomano;
+            NumFolhaArabico = numFolhaArabico;
+            TipoIlustracao = tipoIlustracao;
+            Bibliografia = bibliografia;
+            AlturaFolha = alturaFolha;
+            PalavrasChave = palavrasChave;
+            TipoFonte = tipoFonte;
+            TamFonte = tamFonte;
+        }
+
+        public void GerarFormulario()
+        {
+
+        }
     }
 }

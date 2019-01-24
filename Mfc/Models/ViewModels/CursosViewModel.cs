@@ -1,10 +1,9 @@
 ﻿using Mfc.Models;
-using Mfc.Models.Enuns;
 using System;
 using System.Collections.Generic;
 
 
-namespace Mfc.Views.ViewModels
+namespace Mfc.Models.ViewModels
 {
     public class CursosViewModel
     {

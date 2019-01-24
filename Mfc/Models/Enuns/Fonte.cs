@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
+using System.ComponentModel.DataAnnotations;
+
 
 namespace Mfc.Models.Enuns
 {
     public enum Fonte
     {
+         [Display(Name ="Arial")]
          Arial,
-         TimeNewsRoman
+        [Display(Name = "Time News Roman")]
+        TimeNewsRoman
     }
 }
