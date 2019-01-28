@@ -17,7 +17,13 @@ namespace Mfc.Services
 
         public List<Trabalho> FindAll()
         {
-            return  _context.Trabalho.OrderBy(name => name.NomeTrabalho).ToList();
+            return  _context.Trabalho.OrderBy(x => x.NomeTrabalho).ToList();
+        }
+
+        public void Insert(Cursos obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
         }
     }
 }

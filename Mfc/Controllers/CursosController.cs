@@ -13,15 +13,13 @@ namespace Mfc.Controllers
 {
     public class CursosController : Controller
     {
-        private readonly CursoService _cursoService;
         private readonly TrabalhoService _trabalhoService;
 
         private readonly MfcContext _context;
 
-        public CursosController(MfcContext context, CursoService cursoService, TrabalhoService trabalhoService)
+        public CursosController(MfcContext context, TrabalhoService trabalhoService)
         {
             _context = context;
-            _cursoService = cursoService;
             _trabalhoService = trabalhoService;
         }
 
@@ -60,15 +58,10 @@ namespace Mfc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NomeCurso,Descricao,Trabalho")] Cursos cursos)
+        public IActionResult Create(Cursos cursos)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(cursos);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(cursos);
+            _trabalhoService.Insert(cursos);
+            return  RedirectToAction(nameof(Index));
         }
 
         // GET: Cursos/Edit/5

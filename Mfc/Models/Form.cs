@@ -40,7 +40,7 @@ namespace Mfc.Models
         public int NumFolhaArabico { get; set; }
         public Ilustracao TipoIlustracao { get; set; }
         public bool Bibliografia { get; set; }
-        public int AlturaFolha { get; set; }
+        public int AlturaFolha { get; set; } = 30;
         public string PalavrasChave { get; set; } //Erro por ser list
         public Fonte TipoFonte { get; set; }
         public int TamFonte { get; set; }

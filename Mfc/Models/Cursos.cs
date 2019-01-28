@@ -16,19 +16,22 @@ namespace Mfc.Models
         [Display(Name = "Descrição:")]
         public string Descricao { get; set; }
 
-        public int TrabalhoId { get; set; }
         public Trabalho Trabalho { get; set; }
+
+        public int TrabalhoId { get; set; }
 
         public Cursos()
         {
 
         }
 
-        public Cursos(int id, string nomeCurso, string descricao)
+        public Cursos(int id, string nomeCurso, string descricao, int trabalhoId)
         {
             Id = id;
             NomeCurso = nomeCurso;
             Descricao = descricao;
+            TrabalhoId = trabalhoId;
+
         }
         /*
         public String RetorarCurso(string nomeCurso, string descricao, Trabalho trabalho)
