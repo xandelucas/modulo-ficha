@@ -14,7 +14,7 @@ namespace Mfc.Models
         {
         }
 
-        public DbSet<Mfc.Models.Cursos> Cursos { get; set; }
+        public DbSet<Mfc.Models.Curso> Curso { get; set; }
 
         public DbSet<Mfc.Models.Trabalho> Trabalho { get; set; }
 

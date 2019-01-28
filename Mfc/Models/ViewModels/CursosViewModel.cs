@@ -7,7 +7,8 @@ namespace Mfc.Models.ViewModels
 {
     public class CursosViewModel
     {
-        public Cursos Curso { get; set; }
+        public Curso Curso { get; set; }
         public ICollection<Trabalho> Trabalhos { get; set; }
+
     }
 }

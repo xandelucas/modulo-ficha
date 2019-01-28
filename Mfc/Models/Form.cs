@@ -24,7 +24,7 @@ namespace Mfc.Models
         public CodCutter CodCutter { get; set; }
 
         public Trabalho Trabalho { get; set; }
-        public ICollection<Cursos> Curso { get; set; } = new List<Cursos>(); //Pesquisar como fazer a pesquisa
+        public ICollection<Curso> Curso { get; set; } = new List<Curso>(); //Pesquisar como fazer a pesquisa
 
         [Display(Name = "Nome completo do orientador:")]
         public string NomeOrientador { get; set; }

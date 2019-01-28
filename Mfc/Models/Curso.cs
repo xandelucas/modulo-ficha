@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Mfc.Models
 {
-    public class Cursos
+    public class Curso
     {
         public int Id { get; set; }
 
@@ -20,17 +20,17 @@ namespace Mfc.Models
 
         public int TrabalhoId { get; set; }
 
-        public Cursos()
+        public Curso()
         {
 
         }
 
-        public Cursos(int id, string nomeCurso, string descricao, int trabalhoId)
+        public Curso(int id, string nomeCurso, string descricao, Trabalho trabalho)
         {
             Id = id;
             NomeCurso = nomeCurso;
             Descricao = descricao;
-            TrabalhoId = trabalhoId;
+            Trabalho = trabalho;
 
         }
         /*

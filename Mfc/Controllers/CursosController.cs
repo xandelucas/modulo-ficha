@@ -15,18 +15,21 @@ namespace Mfc.Controllers
     {
         private readonly TrabalhoService _trabalhoService;
 
+        private readonly CursoService _cursoService;
+
         private readonly MfcContext _context;
 
-        public CursosController(MfcContext context, TrabalhoService trabalhoService)
+        public CursosController(MfcContext context, TrabalhoService trabalhoService, CursoService cursoService)
         {
             _context = context;
             _trabalhoService = trabalhoService;
+            _cursoService = cursoService;
         }
 
         // GET: Cursos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cursos.ToListAsync());
+            return View(await _context.Curso.ToListAsync());
         }
 
         // GET: Cursos/Details/5
@@ -37,7 +40,7 @@ namespace Mfc.Controllers
                 return NotFound();
             }
 
-            var cursos = await _context.Cursos
+            var cursos = await _context.Curso
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cursos == null)
             {
@@ -48,19 +51,19 @@ namespace Mfc.Controllers
         }
 
         // GET: Cursos/Create
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync()
         {
-            var trabalho = _trabalhoService.FindAll();
-            var viewModel = new CursosViewModel { Trabalhos = trabalho };
+            var trabalhos = await _trabalhoService.FindAllSync();
+            var viewModel = new CursosViewModel { Trabalhos = trabalhos };
             return View(viewModel);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Cursos cursos)
+        public async Task<IActionResult> CreateAsync(Curso curso)
         {
-            _trabalhoService.Insert(cursos);
+            await _cursoService.InsertAsync(curso);
             return  RedirectToAction(nameof(Index));
         }
 
@@ -72,7 +75,7 @@ namespace Mfc.Controllers
                 return NotFound();
             }
 
-            var cursos = await _context.Cursos.FindAsync(id);
+            var cursos = await _context.Curso.FindAsync(id);
             if (cursos == null)
             {
                 return NotFound();
@@ -85,7 +88,7 @@ namespace Mfc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeCurso,Descricao,Trabalho")] Cursos cursos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeCurso,Descricao,Trabalho")] Curso cursos)
         {
             if (id != cursos.Id)
             {
@@ -123,7 +126,7 @@ namespace Mfc.Controllers
                 return NotFound();
             }
 
-            var cursos = await _context.Cursos
+            var cursos = await _context.Curso
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cursos == null)
             {
@@ -138,15 +141,15 @@ namespace Mfc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cursos = await _context.Cursos.FindAsync(id);
-            _context.Cursos.Remove(cursos);
+            var cursos = await _context.Curso.FindAsync(id);
+            _context.Curso.Remove(cursos);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CursosExists(int id)
         {
-            return _context.Cursos.Any(e => e.Id == id);
+            return _context.Curso.Any(e => e.Id == id);
         }
     }
 }

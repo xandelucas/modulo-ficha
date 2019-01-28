@@ -1,4 +1,5 @@
 ﻿using Mfc.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,15 +16,10 @@ namespace Mfc.Services
             _context = context;
         }
 
-        public List<Trabalho> FindAll()
+        public async Task<ICollection<Trabalho>> FindAllSync()
         {
-            return  _context.Trabalho.OrderBy(x => x.NomeTrabalho).ToList();
+            return await _context.Trabalho.OrderBy(x => x.NomeTrabalho).ToListAsync();
         }
 
-        public void Insert(Cursos obj)
-        {
-            _context.Add(obj);
-            _context.SaveChanges();
-        }
     }
 }
